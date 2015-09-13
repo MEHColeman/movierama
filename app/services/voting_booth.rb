@@ -14,9 +14,12 @@ class VotingBooth
     unvote # to guarantee consistency
     set.add(@user)
     _update_counts
+
+    NotificationEmailer.new(movie: @movie, voter: @user, opinion: like_or_hate)
+      .send_notification
     self
   end
-  
+
   def unvote
     @movie.likers.delete(@user)
     @movie.haters.delete(@user)
