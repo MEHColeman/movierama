@@ -4,5 +4,8 @@ class NotificationEmailer
   def initialize(voter:, movie:, opinion:)
     @voter, @movie, @opinion = voter, movie, opinion
   end
+
+  def send_notification
+    VoteNotificationMailer.send("#{@opinion}_email", @movie, @voter).deliver
   end
 end

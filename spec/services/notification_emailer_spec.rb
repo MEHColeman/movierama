@@ -23,4 +23,21 @@ RSpec.describe NotificationEmailer do
       expect(subject).to be_a NotificationEmailer
     end
   end
+
+  describe '#send_notification' do
+    it 'ensures an email is sent when someone likes a movie' do
+      expect{ subject.send_notification }.to change {
+        ActionMailer::Base.deliveries.count
+      }.by(1)
+
+      email = ActionMailer::Base.deliveries.last
+
+      expect(email.to).to eq ['testy@example.com']
+      expect(email.subject).to eq 'Someone agrees with you!'
+      expect(email.body).to include 'Votey McVoter'
+      expect(email.body).to include 'like the movie'
+      expect(email.body).to include 'Star Wars: The Force Awakens'
+
+    end
+  end
 end
