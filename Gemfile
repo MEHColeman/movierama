@@ -10,7 +10,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 # Use unicorn as the app server
 gem 'unicorn'
 
-# Productio nmonitoring
+# Production monitoring
 gem 'newrelic_rpm'
 # Fixes Rails architecture kludges
 gem 'rails_12factor', group: :production
