@@ -44,6 +44,10 @@ Install `tunnelss`:
 
     $ gem install tunnelss
 
+If you use rbenv, rehash:
+
+    rbenv rehash
+
 Run the SSL tunnel in a terminal:
 
     $ tunnelss 24676 24675
