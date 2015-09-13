@@ -9,4 +9,13 @@ class VoteNotificationMailer < ActionMailer::Base
 
     self
   end
+
+  def hate_email(movie, voter)
+    @recipient = movie.user
+    @movie = movie
+    @voter = voter
+    mail(to: @recipient.email, subject: 'Someone thinks you\'re wrong!')
+
+    self
+  end
 end

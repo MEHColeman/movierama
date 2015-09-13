@@ -41,6 +41,25 @@ RSpec.describe NotificationEmailer do
         expect(email.body).to include 'Star Wars: The Force Awakens'
 
       end
+
+      it 'ensures an email is sent when someone hates a movie' do
+
+        subject = NotificationEmailer.new(
+          voter: voter, movie: movie, opinion: :hate
+        )
+        expect{ subject.send_notification }.to change {
+          ActionMailer::Base.deliveries.count
+        }.by(1)
+
+        email = ActionMailer::Base.deliveries.last
+
+        expect(email.to).to eq ['testy@example.com']
+        expect(email.subject).to eq 'Someone thinks you\'re wrong!'
+        expect(email.body).to include 'Votey McVoter'
+        expect(email.body).to include 'hate the movie'
+        expect(email.body).to include 'Star Wars: The Force Awakens'
+
+      end
     end
 
     context 'the author has no email address' do
