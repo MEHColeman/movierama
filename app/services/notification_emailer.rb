@@ -6,6 +6,7 @@ class NotificationEmailer
   end
 
   def send_notification
+    return if @movie.user.email == nil
     VoteNotificationMailer.send("#{@opinion}_email", @movie, @voter).deliver
   end
 end
